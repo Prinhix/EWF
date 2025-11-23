@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>English Word Finder</title>
+<style>
+    body {
+        margin: 0;
+        background: #121212;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Vùng nhập (30%) */
+    #input-area {
+        height: 30%;
+        padding: 20px;
+        box-sizing: border-box;
+        border-bottom: 2px solid #333;
+    }
+
+    #input-area textarea {
+        width: 100%;
+        height: 100%;
+        background: #1e1e1e;
+        color: white;
+        border: none;
+        resize: none;
+        font-size: 20px;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    /* Vùng hiển thị kết quả (70%) */
+    #result-area {
+        height: 70%;
+        overflow-y: auto;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .word-item {
+        padding: 5px 0;
+        border-bottom: 1px solid #333;
+    }
+</style>
+</head>
+<body>
+
+<div id="input-area">
+    <textarea id="inputBox" placeholder="Nhập ký tự hoặc chuỗi ký tự..."></textarea>
+</div>
+
+<div id="result-area">
+</div>
+
+<script>
+    const dictionary = [
+        "apple","application","aback","abandon","abashed",
+        "abbreviation","aboard","abode","abort","abortion",
+        "ABC","abdicate","abet","abide","abdication","abetting",
+        "abetted","ability","abortive","abound","about","above",
+        "ablaze","able","able-bodied","abnormal","abnormality",
+        "abnormalities","abreast","abrupt","abruptly","abruptness",
+        "abscess","abs","absence","absent","absentee","absenteeism",
+        "absent-minded","absent-mindedly","absolute",
+
+
+
+
+
+
+
+        
+        "apply","appoint","approve","angle","ant","answer",
+        "banana","band","bank","bar","base","basic","basket",
+        "cat","catch","category","cattle","castle","cause",
+        "dog","door","dollar","done","down",
+        "energy","engine","english","enjoy","enter","entire",
+        "fish","file","final","finger","finish","fire","first",
+        "go","good","goal","gold","gone","group",
+        "house","how","however","human","hundred",
+        "information","inside","interest","international","into","item",
+        "job","join","joint","jungle",
+        "key","kid","kill","kind","king",
+        "lion","list","listen","little","live","long",
+        "man","many","map","market","material","matter",
+        "note","nothing","notice","number",
+        "open","operate","opinion","order","other",
+        "people","person","phone","photo","place","plan","plant",
+        "question","quick","quiet","quite",
+        "run","room","road","role","rule",
+        "sun","super","support","sure",
+        "time","thing","think","title","today","together",
+        "use","useful","user","usual",
+        "very","view","visit","voice",
+        "water","wait","wake","walk","wall","want"
+    ];
+
+    const inputBox = document.getElementById("inputBox");
+    const resultArea = document.getElementById("result-area");
+
+    function updateResults() {
+        const query = inputBox.value.trim().toLowerCase();
+        resultArea.innerHTML = "";
+
+        if (query.length === 0) return;
+
+        const results = dictionary.filter(word => word.startsWith(query));
+
+        if (results.length === 0) {
+            resultArea.innerHTML = "<div>Không tìm thấy từ phù hợp.</div>";
+            return;
+        }
+
+        results.forEach(word => {
+            const div = document.createElement("div");
+            div.className = "word-item";
+            div.textContent = word;
+            resultArea.appendChild(div);
+        });
+    }
+
+    inputBox.addEventListener("input", updateResults);
+</script>
+
+</body>
+</html>
